@@ -1,0 +1,1324 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mon Portfolio Animé - [Ton Prénom] - Recherche de stage</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #6C63FF;
+            --secondary: #FF6584;
+            --accent: #36D1DC;
+            --dark: #1A1A2E;
+            --light: #F8F9FF;
+            --gray: #8A8AA3;
+            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Animations globales */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        @keyframes slideInLeft {
+            from { transform: translateX(-100px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        @keyframes slideInRight {
+            from { transform: translateX(100px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        @keyframes fadeInUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes shimmer {
+            0% { background-position: -1000px 0; }
+            100% { background-position: 1000px 0; }
+        }
+
+        /* Header avec gradient animé */
+        header {
+            background: linear-gradient(-45deg, #6C63FF, #36D1DC, #FF6584, #FFC107);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            color: white;
+            padding: 120px 0 80px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 3;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Particules flottantes */
+        .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .particle {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            animation: float 20s infinite linear;
+        }
+
+        .p1 { width: 20px; height: 20px; top: 10%; left: 10%; animation-delay: 0s; }
+        .p2 { width: 30px; height: 30px; top: 20%; right: 15%; animation-delay: 2s; animation-duration: 25s; }
+        .p3 { width: 15px; height: 15px; bottom: 30%; left: 20%; animation-delay: 4s; animation-duration: 18s; }
+        .p4 { width: 25px; height: 25px; bottom: 20%; right: 10%; animation-delay: 6s; animation-duration: 22s; }
+        .p5 { width: 10px; height: 10px; top: 40%; left: 50%; animation-delay: 8s; animation-duration: 30s; }
+
+        /* Photo de profil animée */
+        .profile-container {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            margin: 0 auto 40px;
+        }
+
+        .profile-img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 5px solid white;
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5rem;
+            color: white;
+            position: relative;
+            z-index: 2;
+            overflow: hidden;
+            animation: pulse 3s infinite ease-in-out;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .profile-ring {
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            width: 220px;
+            height: 220px;
+            border-radius: 50%;
+            border: 3px dashed rgba(255, 255, 255, 0.5);
+            animation: rotate 20s infinite linear;
+            z-index: 1;
+        }
+
+        .profile-ring:nth-child(2) {
+            width: 240px;
+            height: 240px;
+            top: -20px;
+            left: -20px;
+            animation: rotate 25s infinite linear reverse;
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            text-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .typing-text {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            min-height: 60px;
+            animation: fadeInUp 1s ease-out 0.3s both;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 16px 40px;
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.2rem;
+            margin-top: 30px;
+            transition: var(--transition);
+            box-shadow: 0 10px 25px rgba(108, 99, 255, 0.4);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            animation: fadeInUp 1s ease-out 0.6s both;
+        }
+
+        .cta-button:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.7s;
+            z-index: -1;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 35px rgba(108, 99, 255, 0.5);
+        }
+
+        .cta-button:hover:before {
+            left: 100%;
+        }
+
+        /* Navigation animée */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 20px 0;
+            background: rgba(26, 26, 46, 0.9);
+            backdrop-filter: blur(10px);
+            transition: var(--transition);
+        }
+
+        nav.scrolled {
+            padding: 15px 0;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 900;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 40px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: white;
+            font-weight: 500;
+            position: relative;
+            padding: 5px 0;
+            transition: var(--transition);
+        }
+
+        .nav-links a:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            transition: width 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .nav-links a:hover:after {
+            width: 100%;
+        }
+
+        .menu-toggle {
+            display: none;
+            font-size: 1.8rem;
+            color: white;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .menu-toggle:hover {
+            color: var(--accent);
+            transform: rotate(90deg);
+        }
+
+        /* Sections */
+        section {
+            padding: 100px 0;
+            position: relative;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 70px;
+            position: relative;
+        }
+
+        .section-title h2 {
+            font-size: 2.8rem;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+
+        .title-decoration {
+            width: 80px;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            margin: 0 auto 30px;
+            border-radius: 5px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .title-decoration:after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.8), transparent);
+            animation: shimmer 2s infinite;
+        }
+
+        /* Cartes avec effets 3D */
+        .card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            height: 100%;
+            transform-style: preserve-3d;
+            perspective: 1000px;
+        }
+
+        .card:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+        }
+
+        .card:hover {
+            transform: translateY(-15px) rotateX(5deg);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Section À propos */
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 60px;
+            flex-wrap: wrap;
+        }
+
+        .about-text {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .about-visual {
+            flex: 1;
+            min-width: 300px;
+            position: relative;
+        }
+
+        .floating-elements {
+            position: relative;
+            height: 400px;
+        }
+
+        .float-element {
+            position: absolute;
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2.5rem;
+            box-shadow: 0 15px 30px rgba(108, 99, 255, 0.3);
+            animation: float 6s infinite ease-in-out;
+        }
+
+        .float-element:nth-child(1) {
+            width: 120px;
+            height: 120px;
+            top: 0;
+            left: 0;
+            animation-delay: 0s;
+        }
+
+        .float-element:nth-child(2) {
+            width: 150px;
+            height: 150px;
+            top: 50px;
+            right: 0;
+            background: linear-gradient(45deg, var(--secondary), #FFC107);
+            animation-delay: 1s;
+            animation-duration: 7s;
+        }
+
+        .float-element:nth-child(3) {
+            width: 100px;
+            height: 100px;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(45deg, var(--accent), #36D1DC);
+            animation-delay: 2s;
+            animation-duration: 5s;
+        }
+
+        /* Compétences avec barres animées */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .skill-bar {
+            margin-bottom: 25px;
+        }
+
+        .skill-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+
+        .skill-name {
+            font-weight: 600;
+        }
+
+        .skill-percentage {
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        .bar-container {
+            height: 10px;
+            background: #E0E0FF;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            border-radius: 5px;
+            width: 0;
+            transition: width 1.5s ease-in-out;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .bar:after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            animation: shimmer 2s infinite;
+        }
+
+        /* Section projets avec effet parallaxe */
+        .projects-section {
+            background: linear-gradient(rgba(26, 26, 46, 0.9), rgba(26, 26, 46, 0.9)), url('https://images.unsplash.com/photo-1517077304055-6e89abbf09b0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80');
+            background-attachment: fixed;
+            background-size: cover;
+            background-position: center;
+            color: white;
+        }
+
+        .projects-section .section-title h2 {
+            background: linear-gradient(45deg, #FF6584, #FFC107);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 40px;
+        }
+
+        .project-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transform: translateY(50px);
+            opacity: 0;
+        }
+
+        .project-card.animated {
+            animation: fadeInUp 0.8s forwards;
+        }
+
+        .project-img {
+            height: 200px;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            border-radius: 15px 15px 0 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-img:after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transform: translateX(-100%);
+        }
+
+        .project-card:hover .project-img:after {
+            animation: shimmer 1.5s;
+        }
+
+        /* Contact */
+        .contact-container {
+            display: flex;
+            gap: 60px;
+            flex-wrap: wrap;
+        }
+
+        .contact-info {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .contact-form {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+            transition: var(--transition);
+            transform: translateX(-50px);
+            opacity: 0;
+        }
+
+        .contact-item.animated {
+            animation: slideInRight 0.8s forwards;
+        }
+
+        .contact-item:hover {
+            transform: translateX(10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .contact-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 20px;
+            font-size: 1.8rem;
+            color: white;
+            flex-shrink: 0;
+        }
+
+        /* Formulaire */
+        .form-group {
+            margin-bottom: 25px;
+            transform: translateX(50px);
+            opacity: 0;
+        }
+
+        .form-group.animated {
+            animation: slideInLeft 0.8s forwards;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .form-group input, .form-group textarea, .form-group select {
+            width: 100%;
+            padding: 15px 20px;
+            border: 2px solid #E0E0FF;
+            border-radius: 12px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            transition: var(--transition);
+            background: white;
+        }
+
+        .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(108, 99, 255, 0.1);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 70px 0 30px;
+            text-align: center;
+        }
+
+        .footer-content {
+            margin-bottom: 40px;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .social-link {
+            width: 60px;
+            height: 60px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+            text-decoration: none;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .social-link:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            opacity: 0;
+            transition: var(--transition);
+            z-index: -1;
+        }
+
+        .social-link:hover {
+            transform: translateY(-10px) scale(1.1);
+        }
+
+        .social-link:hover:before {
+            opacity: 1;
+        }
+
+        .copyright {
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            h1 {
+                font-size: 2.8rem;
+            }
+            
+            .nav-links {
+                position: fixed;
+                top: 80px;
+                left: 0;
+                width: 100%;
+                background: rgba(26, 26, 46, 0.95);
+                backdrop-filter: blur(15px);
+                flex-direction: column;
+                padding: 30px;
+                transform: translateY(-100%);
+                opacity: 0;
+                transition: var(--transition);
+                z-index: 999;
+            }
+            
+            .nav-links.active {
+                transform: translateY(0);
+                opacity: 1;
+            }
+            
+            .menu-toggle {
+                display: block;
+            }
+            
+            .about-content {
+                flex-direction: column;
+            }
+            
+            .floating-elements {
+                height: 300px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .typing-text {
+                font-size: 1.2rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2.2rem;
+            }
+            
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            section {
+                padding: 70px 0;
+            }
+            
+            .profile-container {
+                width: 150px;
+                height: 150px;
+            }
+            
+            .profile-ring {
+                width: 170px;
+                height: 170px;
+            }
+            
+            .profile-ring:nth-child(2) {
+                width: 190px;
+                height: 190px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 15px;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .cta-button {
+                padding: 14px 30px;
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="container nav-container">
+            <div class="logo">Sivanathan Arunan</div>
+            <div class="menu-toggle" id="menuToggle">
+                <i class="fas fa-bars"></i>
+            </div>
+            <div class="nav-links" id="navLinks">
+                <a href="#about"><i class="fas fa-user"></i> À propos</a>
+                <a href="#skills"><i class="fas fa-code"></i> Compétences</a>
+                <a href="#projects"><i class="fas fa-project-diagram"></i> Projets</a>
+                <a href="#contact"><i class="fas fa-envelope"></i> Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <header>
+        <div class="particles">
+            <div class="particle p1"></div>
+            <div class="particle p2"></div>
+            <div class="particle p3"></div>
+            <div class="particle p4"></div>
+            <div class="particle p5"></div>
+        </div>
+        
+        <div class="container">
+            <div class="header-content">
+                <div class="profile-container">
+                    <div class="profile-ring"></div>
+                    <div class="profile-ring"></div>
+                    <div class="profile-img">
+                        <i class="fas fa-user-graduate"></i>
+                    </div>
+                </div>
+                
+                <h1>Arunan Sivanathan</h1>
+                <div class="typing-text" id="typingText">
+                    <!-- Le texte sera inséré par JavaScript -->
+                </div>
+                <p style="opacity: 0.9; animation: fadeInUp 1s ease-out 0.9s both;">Élève de 3ème • CO Belluard • 15 ans</p>
+                <a href="#contact" class="cta-button">
+                    <i class="fas fa-handshake"></i> Proposer un stage
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- À propos -->
+    <section id="about">
+        <div class="container">
+            <div class="section-title">
+                <h2>À propos de moi</h2>
+                <div class="title-decoration"></div>
+                <p>Jeune élève motivé en recherche d'une première expérience professionnelle</p>
+            </div>
+            
+            <div class="about-content">
+                <div class="about-text">
+                    <div class="card">
+                        <h3 style="margin-bottom: 20px; color: var(--primary);">Bonjour !</h3>
+                        <p>Je m'appelle <strong>Arunan</strong> et je suis actuellement en classe de 3ème au CO Belluard. À 15 ans, je suis passionné par l'apprentissage et je cherche à découvrir le monde professionnel à travers un stage d'observation.</p>
+                        <br>
+                        <p>Curieux et sérieux, j'apprends rapidement et j'aime relever de nouveaux défis. À l'école, j'apprécie particulièrement <strong>Informatique</strong>.</p>
+                        <br>
+                        <p>En dehors des cours, je m'intéresse à <strong>Programmation et Football</strong>. Je suis motivé à m'investir pleinement dans un stage pour acquérir de l'expérience et mieux comprendre le fonctionnement d'une entreprise.</p>
+                    </div>
+                </div>
+                
+                <div class="about-visual">
+                    <div class="floating-elements">
+                        <div class="float-element">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <div class="float-element">
+                            <i class="fas fa-lightbulb"></i>
+                        </div>
+                        <div class="float-element">
+                            <i class="fas fa-rocket"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Compétences -->
+    <section id="skills" style="background-color: #F8F9FF;">
+        <div class="container">
+            <div class="section-title">
+                <h2>Mes compétences</h2>
+                <div class="title-decoration"></div>
+                <p>Des compétences développées à l'école et en dehors</p>
+            </div>
+            
+            <div class="skills-grid">
+                <div class="card">
+                    <h3 style="margin-bottom: 25px; color: var(--primary);">Informatique & Numérique</h3>
+                    <div class="skill-bar">
+                        <div class="skill-info">
+                            <span class="skill-name">Suite Office</span>
+                            <span class="skill-percentage" data-width="75">75%</span>
+                        </div>
+                        <div class="bar-container">
+                            <div class="bar" data-width="75"></div>
+                        </div>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-info">
+                            <span class="skill-name">Recherche Internet</span>
+                            <span class="skill-percentage" data-width="90">90%</span>
+                        </div>
+                        <div class="bar-container">
+                            <div class="bar" data-width="90"></div>
+                        </div>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-info">
+                            <span class="skill-name">Initiation HTML/CSS</span>
+                            <span class="skill-percentage" data-width="90">90%</span>
+                        </div>
+                        <div class="bar-container">
+                            <div class="bar" data-width="90"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <h3 style="margin-bottom: 25px; color: var(--primary);">Langues & Communication</h3>
+                    <div class="skill-bar">
+                        <div class="skill-info">
+                            <span class="skill-name">Français</span>
+                            <span class="skill-percentage" data-width="70">70%</span>
+                        </div>
+                        <div class="bar-container">
+                            <div class="bar" data-width="70"></div>
+                        </div>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-info">
+                            <span class="skill-name">Anglais</span>
+                            <span class="skill-percentage" data-width="85">85%</span>
+                        </div>
+                        <div class="bar-container">
+                            <div class="bar" data-width="85"></div>
+                        </div>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-info">
+                            <span class="skill-name">Présentation orale</span>
+                            <span class="skill-percentage" data-width="80">80%</span>
+                        </div>
+                        <div class="bar-container">
+                            <div class="bar" data-width="80"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <h3 style="margin-bottom: 25px; color: var(--primary);">Qualités personnelles</h3>
+                    <div class="skill-bar">
+                        <div class="skill-info">
+                            <span class="skill-name">Travail d'équipe</span>
+                            <span class="skill-percentage" data-width="85">85%</span>
+                        </div>
+                        <div class="bar-container">
+                            <div class="bar" data-width="85"></div>
+                        </div>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-info">
+                            <span class="skill-name">Curiosité</span>
+                            <span class="skill-percentage" data-width="90">90%</span>
+                        </div>
+                        <div class="bar-container">
+                            <div class="bar" data-width="90"></div>
+                        </div>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-info">
+                            <span class="skill-name">Adaptabilité</span>
+                            <span class="skill-percentage" data-width="80">80%</span>
+                        </div>
+                        <div class="bar-container">
+                            <div class="bar" data-width="80"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projets -->
+    <section id="projects" class="projects-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Mes réalisations</h2>
+                <div class="title-decoration"></div>
+                <p>Quelques projets et personnels</p>
+            </div>
+            
+            <div class="projects-grid">
+                <div class="card project-card">
+                    <div class="project-img">
+                        <i class="fas fa-file-powerpoint"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3 style="color: white; margin-bottom: 15px;">Tutus’s Funny</h3>
+                        <p>Site dédié au divertissement et aux contenus humoristiques.</p>
+                    </div>
+                </div>
+                
+                <div class="card project-card">
+                    <div class="project-img">
+                        <i class="fas fa-leaf"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3 style="color: white; margin-bottom: 15px;">Clerksy – Projet Webflow</h3>
+                        <p>Utilisation de Webflow pour structurer et styliser le site</p>
+                    </div>
+                </div>
+                
+                <div class="card project-card">
+                    <div class="project-img">
+                        <i class="fas fa-paint-brush"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3 style="color: white; margin-bottom: 15px;">Tamilpolil.com</h3>
+                        <p>Développement en HTML, CSS et JavaScript</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact">
+        <div class="container">
+            <div class="section-title">
+                <h2>Contactez-moi</h2>
+                <div class="title-decoration"></div>
+                <p>Pour me proposer un stage ou échanger sur une opportunité</p>
+            </div>
+            
+            <div class="contact-container">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-user-graduate"></i>
+                        </div>
+                        <div>
+                            <h3>Mon profil</h3>
+                            <p>Arunan Sivanathan</p>
+                            <p>15 ans - Élève de 3ème</p>
+                            <p>CO Belluard</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div>
+                            <h3>Email</h3>
+                            <p>arunan.sivanthan@studentfr.ch</p>
+                            <p>Réponse rapide garantie</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div>
+                            <h3>Téléphone</h3>
+                            <p>+41 76 252 40 20</p>
+                            <p>Disponible après 16h</p>
+                        </div>
+                    </div>
+                </div>
+                
+                
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <h3 style="margin-bottom: 20px; font-size: 2rem;">
+                    <span style="background: linear-gradient(45deg, #FF6584, #FFC107); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
+                        Sivanathan Arunan
+                    </span>
+                </h3>
+                <p>Élève de 3ème • CO Belluard • Recherche de stage d'observation</p>
+                
+               
+                    
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>© 2023 Portfolio de Arunan . Tous droits réservés.</p>
+                <p style="margin-top: 10px;">Conçu avec ❤️ pour ma recherche de stage</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Effet de navigation au scroll
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Menu mobile
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+        
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            menuToggle.querySelector('i').classList.toggle('fa-bars');
+            menuToggle.querySelector('i').classList.toggle('fa-times');
+        });
+
+        // Texte qui s'écrit automatiquement
+        const typingText = document.getElementById('typingText');
+        const texts = [
+            "Élève motivé de 15 ans",
+            "Recherche un stage d'observation",
+            "Prêt à apprendre et à m'investir",
+            "Futur professionnel en devenir"
+        ];
+        let textIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        let typingSpeed = 100;
+
+        function typeText() {
+            const currentText = texts[textIndex];
+            
+            if (isDeleting) {
+                typingText.textContent = currentText.substring(0, charIndex - 1);
+                charIndex--;
+                typingSpeed = 50;
+            } else {
+                typingText.textContent = currentText.substring(0, charIndex + 1);
+                charIndex++;
+                typingSpeed = 100;
+            }
+
+            if (!isDeleting && charIndex === currentText.length) {
+                isDeleting = true;
+                typingSpeed = 1000; // Pause à la fin du mot
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                textIndex = (textIndex + 1) % texts.length;
+                typingSpeed = 500; // Pause avant le prochain mot
+            }
+
+            setTimeout(typeText, typingSpeed);
+        }
+
+        // Démarrer l'animation après le chargement
+        window.addEventListener('load', () => {
+            setTimeout(typeText, 1000);
+        });
+
+        // Animation des barres de compétences au scroll
+        function animateSkillBars() {
+            const skillBars = document.querySelectorAll('.bar');
+            skillBars.forEach(bar => {
+                const rect = bar.getBoundingClientRect();
+                if (rect.top < window.innerHeight - 100) {
+                    const width = bar.getAttribute('data-width');
+                    bar.style.width = width + '%';
+                }
+            });
+        }
+
+        // Animation des éléments au scroll
+        function animateOnScroll() {
+            // Compétences
+            animateSkillBars();
+            
+            // Cartes projets
+            const projectCards = document.querySelectorAll('.project-card');
+            projectCards.forEach((card, index) => {
+                const rect = card.getBoundingClientRect();
+                if (rect.top < window.innerHeight - 100 && !card.classList.contains('animated')) {
+                    setTimeout(() => {
+                        card.classList.add('animated');
+                    }, index * 200);
+                }
+            });
+            
+            // Contacts
+            const contactItems = document.querySelectorAll('.contact-item');
+            contactItems.forEach((item, index) => {
+                const rect = item.getBoundingClientRect();
+                if (rect.top < window.innerHeight - 100 && !item.classList.contains('animated')) {
+                    setTimeout(() => {
+                        item.classList.add('animated');
+                    }, index * 200);
+                }
+            });
+            
+            // Formulaire
+            const formGroups = document.querySelectorAll('.form-group');
+            formGroups.forEach((group, index) => {
+                const rect = group.getBoundingClientRect();
+                if (rect.top < window.innerHeight - 100 && !group.classList.contains('animated')) {
+                    setTimeout(() => {
+                        group.classList.add('animated');
+                    }, index * 200);
+                }
+            });
+        }
+
+        // Écouter le scroll pour les animations
+        window.addEventListener('scroll', animateOnScroll);
+        window.addEventListener('load', animateOnScroll);
+
+        // Smooth scroll pour les ancres
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    // Fermer le menu mobile si ouvert
+                    navLinks.classList.remove('active');
+                    menuToggle.querySelector('i').classList.add('fa-bars');
+                    menuToggle.querySelector('i').classList.remove('fa-times');
+                    
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Gestion du formulaire
+        const contactForm = document.getElementById('contactForm');
+        
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Récupérer les valeurs
+            const name = document.getElementById('name').value;
+            const company = document.getElementById('company').value;
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
+            
+            // Simuler l'envoi
+            const button = contactForm.querySelector('button');
+            const originalText = button.innerHTML;
+            
+            button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Envoi en cours...';
+            button.disabled = true;
+            
+            setTimeout(() => {
+                alert(`Merci ${name} ! Votre message a été envoyé. Je vous répondrai très rapidement.`);
+                
+                // Réinitialiser
+                contactForm.reset();
+                button.innerHTML = originalText;
+                button.disabled = false;
+            }, 1500);
+        });
+
+        // Effet de particules dynamiques
+        function createParticles() {
+            const particlesContainer = document.querySelector('.particles');
+            const colors = ['rgba(255, 255, 255, 0.3)', 'rgba(108, 99, 255, 0.3)', 'rgba(54, 209, 220, 0.3)'];
+            
+            for (let i = 0; i < 15; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                
+                // Taille aléatoire
+                const size = Math.random() * 25 + 5;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                
+                // Position aléatoire
+                particle.style.left = `${Math.random() * 100}%`;
+                particle.style.top = `${Math.random() * 100}%`;
+                
+                // Couleur aléatoire
+                particle.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                
+                // Animation aléatoire
+                const duration = Math.random() * 20 + 15;
+                const delay = Math.random() * 10;
+                particle.style.animation = `float ${duration}s infinite linear ${delay}s`;
+                
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        // Créer les particules après le chargement
+        window.addEventListener('load', createParticles);
+    </script>
+</body>
+</html>
